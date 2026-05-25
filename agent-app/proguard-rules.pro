@@ -1,30 +1,24 @@
-# ProGuard rules for Agent App
--keep class com.devices.agent.** { *; }
--keep class io.ktor.** { *; }
--keep class com.google.zxing.** { *; }
+# ProGuard Rules for Agent App
 
-# Keep AndroidX classes
+# Keep all classes in com.devices.agent package
+-keep class com.devices.agent.** { *; }
+
+# Keep Android framework classes
+-keep class android.** { *; }
 -keep class androidx.** { *; }
 
-# Keep native methods
--keepclasseswithmembernames class * {
-    native <methods>;
-}
+# Keep Kotlin metadata
+-keepattributes *Annotation*
+-keepattributes Signature
+-keepattributes SourceFile,LineNumberTable
 
-# Keep enums
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
+# Keep Ktor client
+-keep class io.ktor.client.** { *; }
+-keep class io.ktor.util.** { *; }
 
-# Optimization
+# Keep ZXing
+-keep class com.google.zxing.** { *; }
+
+# Optimization settings
 -optimizationpasses 5
--dontpreverify
--verbose
-
-# Remove logging
--assumenosideeffects class android.util.Log {
-    public static *** d(...);
-    public static *** v(...);
-    public static *** i(...);
-}
+-dontobfuscate
