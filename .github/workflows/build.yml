@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up JDK 11
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         java-version: '11'
         distribution: 'temurin'
@@ -30,30 +30,15 @@ jobs:
       run: ./gradlew :monitor-app:assembleRelease
 
     - name: Upload Agent App APK
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: agent-app-release
         path: agent-app/build/outputs/apk/release/
+        if-no-files-found: warn
 
     - name: Upload Monitor App APK
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: monitor-app-release
         path: monitor-app/build/outputs/apk/release/
-
-    - name: Create Release
-      if: github.event_name == 'push'
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ github.run_number }}
-        release_name: Release ${{ github.run_number }}
-        body: |
-          Automatic build from commit ${{ github.sha }}
-          
-          **APK Files:**
-          - agent-app-release.apk
-          - monitor-app-release.apk
-        draft: false
-        prerelease: false
+        if-no-files-found: warn

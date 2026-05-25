@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "devices-manager"
-include(":monitor-app")
 include(":agent-app")
+include(":monitor-app")
