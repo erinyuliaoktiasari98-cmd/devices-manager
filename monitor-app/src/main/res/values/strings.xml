@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Monitor App</string>
+    <string name="connect">Connect to Device</string>
+    <string name="camera_stream">Camera Stream</string>
+    <string name="screen_share">Screen Share</string>
+    <string name="location">GPS Location</string>
+    <string name="enter_qr_code">Enter QR Code</string>
+</resources>

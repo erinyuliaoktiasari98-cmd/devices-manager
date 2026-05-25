@@ -1,0 +1,15 @@
+*.iml
+.gradle
+.idea
+.DS_Store
+build/
+proguard/
+*.apk
+*.ap_
+*.class
+*.jar
+*.log
+.settings/
+.classpath
+.project
+*.swp
