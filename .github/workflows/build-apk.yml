@@ -1,43 +1,20 @@
 name: Build APK
-
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
         java-version: '17'
         cache: 'gradle'
-
-    - name: Grant Execute Permission for Gradlew
-      run: chmod +x gradlew
-
-    - name: Build Monitor App (Debug)
-      run: ./gradlew :monitor-app:assembleDebug
-
-    - name: Build Agent App (Debug)
-      run: ./gradlew :agent-app:assembleDebug
-
-    - name: Upload Monitor APK
-      uses: actions/upload-artifact@v4
+    - run: chmod +x gradlew
+    - run: ./gradlew assembleDebug
+    - uses: actions/upload-artifact@v4
       with:
-        name: monitor-app-debug
-        path: monitor-app/build/outputs/apk/debug/*.apk
-
-    - name: Upload Agent APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: agent-app-debug
-        path: agent-app/build/outputs/apk/debug/*.apk
+        name: apks
+        path: "**/build/outputs/apk/debug/*.apk"
